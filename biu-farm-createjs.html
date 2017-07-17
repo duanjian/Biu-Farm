@@ -40,8 +40,65 @@
             var i = 0,
                 manifest = [
                     { src: 'img/farm-background.png', id: 'bg' },
-                    { src: 'img/farm-warehouse-icon.png', id: 'icon-warehouse' },
-                    { src: 'img/farm-seed-icon.png', id: 'icon-seed' }
+
+                    { src: 'img/farm-field-1.png', id: 'field_1' },
+                    { src: 'img/farm-field-2.png', id: 'field_2' },
+                    { src: 'img/farm-field-3.png', id: 'field_3' },
+                    { src: 'img/farm-field-4.png', id: 'field_4' },
+                    { src: 'img/farm-field-5.png', id: 'field_5' },
+                    { src: 'img/farm-field-6.png', id: 'field_6' },
+                    { src: 'img/farm-field-7.png', id: 'field_7' },
+                    { src: 'img/farm-field-8.png', id: 'field_8' },
+                    { src: 'img/farm-field-9.png', id: 'field_9' },
+                    { src: 'img/farm-field-10.png', id: 'field_10' },
+                    { src: 'img/farm-field-11.png', id: 'field_11' },
+                    { src: 'img/farm-field-12.png', id: 'field_12' },
+                    { src: 'img/farm-field-13.png', id: 'field_13' },
+                    { src: 'img/farm-field-14.png', id: 'field_14' },
+                    { src: 'img/farm-field-15.png', id: 'field_15' },
+
+                    { src: 'img/farm-grass-1.png', id: 'grass_1' },
+                    { src: 'img/farm-grass-2.png', id: 'grass_2' },
+                    { src: 'img/farm-grass-3.png', id: 'grass_3' },
+                    { src: 'img/farm-grass-4.png', id: 'grass_4' },
+                    { src: 'img/farm-grass-5.png', id: 'grass_5' },
+                    { src: 'img/farm-grass-6.png', id: 'grass_6' },
+                    { src: 'img/farm-grass-7.png', id: 'grass_7' },
+                    { src: 'img/farm-grass-8.png', id: 'grass_8' },
+                    { src: 'img/farm-grass-9.png', id: 'grass_9' },
+                    { src: 'img/farm-grass-10.png', id: 'grass_10' },
+                    { src: 'img/farm-grass-11.png', id: 'grass_11' },
+                    { src: 'img/farm-grass-12.png', id: 'grass_12' },
+                    { src: 'img/farm-grass-13.png', id: 'grass_13' },
+                    { src: 'img/farm-grass-14.png', id: 'grass_14' },
+                    { src: 'img/farm-grass-15.png', id: 'grass_15' },
+
+                    { src: 'img/tomato-1.png', id: 'tomato_1' },
+                    { src: 'img/tomato-2.png', id: 'tomato_2' },
+                    { src: 'img/tomato-3.png', id: 'tomato_3' },
+                    { src: 'img/tomato-4.png', id: 'tomato_4' },
+                    { src: 'img/tomato-5.png', id: 'tomato_5' },
+                    { src: 'img/tomato-6.png', id: 'tomato_6' },
+                    { src: 'img/tomato-7.png', id: 'tomato_7' },
+                    { src: 'img/tomato-8.png', id: 'tomato_8' },
+                    { src: 'img/tomato-9.png', id: 'tomato_9' },
+                    { src: 'img/tomato-10.png', id: 'tomato_10' },
+                    { src: 'img/tomato-11.png', id: 'tomato_11' },
+                    { src: 'img/tomato-12.png', id: 'tomato_12' },
+                    { src: 'img/tomato-13.png', id: 'tomato_13' },
+                    { src: 'img/tomato-14.png', id: 'tomato_14' },
+                    { src: 'img/tomato-15.png', id: 'tomato_15' },
+
+
+                    { src: 'img/icon-warehouse.png', id: 'icon-warehouse' },
+                    { src: 'img/icon-seed.png', id: 'icon-seed' },
+                    { src: 'img/icon-golden.png', id: 'icon-golden' },
+                    { src: 'img/icon-envelope.png', id: 'icon-envelope' },
+                    { src: 'img/icon-taskbook.png', id: 'icon-taskbook' },
+                    { src: 'img/icon-gloves.png', id: 'icon-gloves' },
+                    { src: 'img/icon-kettle.png', id: 'icon-kettle' },
+                    { src: 'img/icon-pesticide.png', id: 'icon-pesticide' },
+                    { src: 'img/icon-shovel.png', id: 'icon-shovel' }
                 ];
 
             var loader = new createjs.LoadQueue();//采用标签形式加载
@@ -54,6 +111,7 @@
 
             //预加载完成
             function handleComplete() {
+
                 console.log('load complete!');
 
                 var stage, w, h;
@@ -63,8 +121,63 @@
                 w = stage.canvas.width;
                 h = stage.canvas.height;
 
+                var paramH = 2.6;
+                var preH = h / 12 - 2;
+                var preW = w / 12;
+
                 var bg = new createjs.Bitmap(loader.getResult('bg'));
                 stage.addChild(bg.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
+
+                for (var i = 1; i <= 15; i++) {
+
+                    var field = new createjs.Bitmap(loader.getResult('field_'+i));
+                    stage.addChild(field.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
+                    field.addEventListener("click", function () {
+                        alert('field1')
+                    });
+
+                }
+
+                //for (var i = 1; i <= 15; i++) {
+
+                //    var grass = new createjs.Bitmap(loader.getResult('grass_' + i));
+                //    stage.addChild(grass.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
+                //    grass.addEventListener("click", function () {
+                //        alert('grass')
+                //    });
+
+                //}
+
+                for (var i = 1; i <= 15; i++) {
+
+                    var tomato = new createjs.Bitmap(loader.getResult('tomato_' + i));
+                    stage.addChild(tomato.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
+                    tomato.addEventListener("click", function () {
+                        alert('grass')
+                    });
+
+                }
+
+                //var field_14 = new createjs.Bitmap(loader.getResult('field_14'));
+                //stage.addChild(field_14.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
+                //field_14.addEventListener("click", function () {
+                //    alert('field1')
+                //});
+
+                //var field_15 = new createjs.Bitmap(loader.getResult('field_15'));
+                //stage.addChild(field_15.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
+                //field_15.addEventListener("click", function () {
+                //    alert('field')
+                //});
+
+                
+
+                //var field = new createjs.Bitmap(loader.getResult('field-single'));
+                //stage.addChild(field.setTransform(0 + (w / 2.34 - field.image.width / 2), h - (90 * (h / 667)) - field.image.height, w / bg.image.width, h / bg.image.height));
+                ////stage.addChild(filed.setTransform(100, 100, w / bg.image.width, h / bg.image.height));
+                //field.addEventListener("click", function () {
+                //    alert('仓库功能暂未开放')
+                //});
 
                 var icon_warehouse = new createjs.Bitmap(loader.getResult('icon-warehouse'));
                 icon_warehouse.shadow = new createjs.Shadow("yellow", -1, -1, 30);
@@ -73,18 +186,17 @@
                     alert('仓库功能暂未开放')
                 });
 
-
                 //icon_warehouse.shadow.color = '#FFFFF0';
                 //var tween = createjs.Tween.get(icon_warehouse.shadow, { loop: true }).to({ color: '#FFFF00' }, 600).to({ color: '#FFFFF0' }, 600).call(function () {
                 //    //icon_warehouse.shadow.color = '#7CFC00';
                 //    console.log(icon_warehouse.shadow.color);
                 //});
-                
-                stage.addChild(icon_warehouse.setTransform(w - w / 6, h - h / 3, w / bg.image.width, h / bg.image.height));
 
-                createjs.Tween.get(icon_warehouse, { loop: true }).to({ x: icon_warehouse.x + 5 }, 1000).to({ x: icon_warehouse.x }, 800).call(function () {
-                    console.log(1);
-                });
+                
+
+                stage.addChild(icon_warehouse.setTransform(w - w / 6, preH * 7, w / bg.image.width, h / bg.image.height));
+
+                createjs.Tween.get(icon_warehouse, { loop: true }).to({ x: icon_warehouse.x + 5 }, 1000).to({ x: icon_warehouse.x }, 800);
 
                 var icon_seed = new createjs.Bitmap(loader.getResult('icon-seed'));
                 icon_seed.shadow = new createjs.Shadow("yellow", -1, -1, 30);
@@ -92,13 +204,83 @@
                     alert('种子袋功能暂未开放')
                 });
 
-                stage.addChild(icon_seed.setTransform(w - w / 6, h - (h / 3) + icon_seed.image.height, w / bg.image.width, h / bg.image.height));
+                stage.addChild(icon_seed.setTransform(w - w / 6, preH * 8, w / bg.image.width, h / bg.image.height));
 
-                createjs.Tween.get(icon_seed, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800).call(function () {
-                    console.log(1);
+                createjs.Tween.get(icon_seed, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+
+
+                var icon_golden = new createjs.Bitmap(loader.getResult('icon-golden'));
+                icon_golden.shadow = new createjs.Shadow("yellow", -1, -1, 30);
+                icon_golden.addEventListener("click", function () {
+                    alert('钱袋功能暂未开放')
                 });
 
-                //stage.update()
+                stage.addChild(icon_golden.setTransform(w - w / 6, preH * 9, w / bg.image.width, h / bg.image.height));
+
+                createjs.Tween.get(icon_golden, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+
+
+                var icon_envelope = new createjs.Bitmap(loader.getResult('icon-envelope'));
+                icon_envelope.shadow = new createjs.Shadow("yellow", -1, -1, 30);
+                icon_envelope.addEventListener("click", function () {
+                    alert('书信功能暂未开放')
+                });
+
+                stage.addChild(icon_envelope.setTransform(w - w / 6, preH * 10, w / bg.image.width, h / bg.image.height));
+
+                createjs.Tween.get(icon_envelope, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+
+
+                var icon_taskbook = new createjs.Bitmap(loader.getResult('icon-taskbook'));
+                icon_taskbook.shadow = new createjs.Shadow("yellow", -1, -1, 30);
+                icon_taskbook.addEventListener("click", function () {
+                    alert('任务功能暂未开放')
+                });
+
+                stage.addChild(icon_taskbook.setTransform(w - w / 6, preH * 11, w / bg.image.width, h / bg.image.height));
+
+                createjs.Tween.get(icon_taskbook, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+
+                var icon_kettle = new createjs.Bitmap(loader.getResult('icon-kettle'));
+                icon_kettle.shadow = new createjs.Shadow("yellow", -1, -1, 30);
+                icon_kettle.addEventListener("click", function () {
+                    alert('水壶')
+                });
+
+                stage.addChild(icon_kettle.setTransform(0, preH * 0, w / bg.image.width, h / bg.image.height));
+
+                //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+
+                var icon_pesticide = new createjs.Bitmap(loader.getResult('icon-pesticide'));
+                icon_pesticide.shadow = new createjs.Shadow("yellow", -1, -1, 30);
+                icon_pesticide.addEventListener("click", function () {
+                    alert('药壶')
+                });
+
+                stage.addChild(icon_pesticide.setTransform(0, preH * 1.5, w / bg.image.width, h / bg.image.height));
+
+                //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+
+                var icon_shovel = new createjs.Bitmap(loader.getResult('icon-shovel'));
+                icon_shovel.shadow = new createjs.Shadow("yellow", -1, -1, 30);
+                icon_shovel.addEventListener("click", function () {
+                    alert('铁铲')
+                });
+
+                stage.addChild(icon_shovel.setTransform(0, preH * 7, w / bg.image.width, h / bg.image.height));
+
+                //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+
+                var icon_gloves = new createjs.Bitmap(loader.getResult('icon-gloves'));
+                icon_gloves.shadow = new createjs.Shadow("yellow", -1, -1, 30);
+                icon_gloves.addEventListener("click", function () {
+                    alert('手套')
+                });
+
+                stage.addChild(icon_gloves.setTransform(0, preH * 8, w / bg.image.width, h / bg.image.height));
+
+                //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+
 
                 createjs.Ticker.setFPS(60);
                 createjs.Ticker.addEventListener("tick", tick);
