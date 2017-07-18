@@ -1,7 +1,7 @@
 ﻿<html>
 <head>
     <meta charset=utf-8 />
-    <title>绘图示列</title>
+    <title>必优农场</title>
 
 
     <style type="text/css">
@@ -30,7 +30,39 @@
     <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
     <script type="text/javascript">
 
+        String.prototype.startWith = function (str) {
+            var reg = new RegExp("^" + str);
+            return reg.test(this);
+        }
+
+        String.prototype.endWith = function (str) {
+            var reg = new RegExp(str + "$");
+            return reg.test(this);
+        }
+
+
+        var stage, w, h;
+
+
         $(function () {
+
+            var data = [
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'tomato', 'step': 3 },
+                { 'category': 'grass', 'step': 3 },
+                { 'category': 'grass', 'step': 3 },
+                { 'category': 'grass', 'step': 3 },
+                { 'category': 'grass', 'step': 3 },
+                { 'category': 'grass', 'step': 3 }
+            ]
 
             var canvas = document.getElementById("canvas");
 
@@ -89,7 +121,6 @@
                     { src: 'img/tomato-14.png', id: 'tomato_14' },
                     { src: 'img/tomato-15.png', id: 'tomato_15' },
 
-
                     { src: 'img/icon-warehouse.png', id: 'icon-warehouse' },
                     { src: 'img/icon-seed.png', id: 'icon-seed' },
                     { src: 'img/icon-golden.png', id: 'icon-golden' },
@@ -114,7 +145,6 @@
 
                 console.log('load complete!');
 
-                var stage, w, h;
                 stage = new createjs.Stage(canvas);//实例化舞台
                 createjs.Touch.enable(stage);//开启触摸
                 createjs.Ticker.addEventListener('tick', stage);//监听舞台并更新舞台
@@ -130,7 +160,7 @@
 
                 for (var i = 1; i <= 15; i++) {
 
-                    var field = new createjs.Bitmap(loader.getResult('field_'+i));
+                    var field = new createjs.Bitmap(loader.getResult('field_' + i));
                     stage.addChild(field.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
                     field.addEventListener("click", function () {
                         alert('field1')
@@ -148,15 +178,31 @@
 
                 //}
 
-                for (var i = 1; i <= 15; i++) {
+                var imgArr = [];
 
-                    var tomato = new createjs.Bitmap(loader.getResult('tomato_' + i));
-                    stage.addChild(tomato.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
-                    tomato.addEventListener("click", function () {
+                for (var i = 1; i <= data.length; i++) {
+
+                    var cate = data[i - 1].category
+                    var name = cate + '_' + i;
+                    var img = new createjs.Bitmap(loader.getResult(name));
+                    img.name = name
+                    stage.addChild(img.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
+                    img.addEventListener("click", function () {
                         alert('grass')
                     });
 
+                    imgArr.push(img)
                 }
+
+                //for (var i = 1; i <= 15; i++) {
+
+                //    var tomato = new createjs.Bitmap(loader.getResult('tomato_' + i));
+                //    stage.addChild(tomato.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
+                //    tomato.addEventListener("click", function () {
+                //        alert('grass')
+                //    });
+
+                //}
 
                 //var field_14 = new createjs.Bitmap(loader.getResult('field_14'));
                 //stage.addChild(field_14.setTransform(0, 0, w / bg.image.width, h / bg.image.height));
@@ -170,7 +216,7 @@
                 //    alert('field')
                 //});
 
-                
+
 
                 //var field = new createjs.Bitmap(loader.getResult('field-single'));
                 //stage.addChild(field.setTransform(0 + (w / 2.34 - field.image.width / 2), h - (90 * (h / 667)) - field.image.height, w / bg.image.width, h / bg.image.height));
@@ -192,7 +238,7 @@
                 //    console.log(icon_warehouse.shadow.color);
                 //});
 
-                
+
 
                 stage.addChild(icon_warehouse.setTransform(w - w / 6, preH * 7, w / bg.image.width, h / bg.image.height));
 
@@ -274,12 +320,12 @@
                 var icon_gloves = new createjs.Bitmap(loader.getResult('icon-gloves'));
                 icon_gloves.shadow = new createjs.Shadow("yellow", -1, -1, 30);
                 icon_gloves.addEventListener("click", function () {
-                    alert('手套')
+                    removeAllRipe(imgArr)
                 });
 
                 stage.addChild(icon_gloves.setTransform(0, preH * 8, w / bg.image.width, h / bg.image.height));
 
-                //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
+                createjs.Tween.get(icon_gloves, { loop: true }).to({ x: icon_gloves.x + 5 }, 500).to({ x: icon_gloves.x }, 800);
 
 
                 createjs.Ticker.setFPS(60);
@@ -290,6 +336,19 @@
                 }
             }
         });
+
+        function removeAllRipe(imgArr) {
+            for (var i = 0; i < imgArr.length; i++) {
+                if (!imgArr[i].name.startWith('grass')) {
+
+                    createjs.Tween.get(imgArr[i]).wait(100).to({x: 20, alpha: 0, visible: false }, 1000).call(function () {
+                        stage.removeChild(imgArr[i])
+                    });
+
+                }
+            }
+        }
+
     </script>
 
 </body>
