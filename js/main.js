@@ -36,9 +36,12 @@ var data = [
 function init() {
     canvas = document.getElementById("mainView");
 
+<<<<<<< HEAD
     stageScaleY = stageHeight / 1334;//锁屏的强制横屏标题栏在左边所以要减去128
     stageScaleX = stageWidth / (750);
 
+=======
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
     stage = new createjs.Stage(canvas);
     container = new createjs.Container();
     stage.addChild(container);
@@ -60,7 +63,11 @@ function init() {
         createjs.Ticker.addEventListener("tick", stageBreakHandler);
 
     }
+<<<<<<< HEAD
 
+=======
+   
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 }
 function stageBreakHandler(event) {
     if (stageWidth != document.documentElement.clientWidth || stageHeight != document.documentElement.clientHeight) {
@@ -73,6 +80,7 @@ function stageBreakHandler(event) {
         //alert(document.body.clientWidth)
         //alert(document.body.clientHeight)
 
+<<<<<<< HEAD
         //alert(stageHeight / 1334)
         //alert(stageWidth /750)
 
@@ -109,15 +117,37 @@ function stageBreakHandler(event) {
 
             //stage.scaleX = stageScaleX;
             //stage.scaleY = stageScaleY;
+=======
+        //新的自适应方式
+        canvas.width = stageWidth;
+        canvas.height = stageHeight;
+        if (stageWidth < stageHeight) {
+            stageScaleY = stageHeight / 1206;//锁屏的强制横屏标题栏在左边所以要减去128
+            stageScaleX = stageWidth / 750;
+            container.rotation = 90;
+            container.x = 750 * stageScaleY;
+            container.scaleX = stageScaleX;
+            container.scaleY = stageScaleY;
+
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
         }
         else {
             stageScaleY = stageHeight / 1334;
             stageScaleX = stageWidth / 750;
+<<<<<<< HEAD
+=======
+
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
             container.rotation = 0;
             container.x = 0;
             container.scaleX = stageScaleX;
             container.scaleY = stageScaleY;
         }
+<<<<<<< HEAD
+=======
+
+       
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
     }
     stage.update();
 }
@@ -222,11 +252,18 @@ function handleComplete() {
     h = stage.canvas.height;
 
     var paramH = 2.6;
+<<<<<<< HEAD
     var preH = h / 10.8;
     var preW = w / 6;
 
     var bg = new createjs.Bitmap(loader.getResult('bg'));    
 
+=======
+    var preH = h / 12;
+    var preW = w / 12;
+
+    var bg = new createjs.Bitmap(loader.getResult('bg'));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
     container.addChild(bg);
 
     for (var i = 1; i <= 15; i++) {
@@ -262,7 +299,11 @@ function handleComplete() {
         alert('仓库功能暂未开放')
     });
 
+<<<<<<< HEAD
     container.addChild(icon_warehouse.setTransform(preH * 8));
+=======
+    container.addChild(icon_warehouse.setTransform(h - preH * 5));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 
     createjs.Tween.get(icon_warehouse, { loop: true }).to({ y: icon_warehouse.y + 5 }, 1000).to({ y: icon_warehouse.y }, 800);
 
@@ -272,17 +313,29 @@ function handleComplete() {
         alert('种子袋功能暂未开放')
     });
 
+<<<<<<< HEAD
     container.addChild(icon_seed.setTransform(preH * 9));
 
     createjs.Tween.get(icon_seed, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
 
+=======
+    container.addChild(icon_seed.setTransform(h - preH * 4));
+
+    createjs.Tween.get(icon_seed, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
+
+
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
     var icon_golden = new createjs.Bitmap(loader.getResult('icon-golden'));
     icon_golden.shadow = new createjs.Shadow("yellow", -1, -1, 30);
     icon_golden.addEventListener("click", function () {
         alert('钱袋功能暂未开放')
     });
 
+<<<<<<< HEAD
     container.addChild(icon_golden.setTransform(preH * 10));
+=======
+    container.addChild(icon_golden.setTransform(h - preH * 3));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 
     createjs.Tween.get(icon_golden, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
 
@@ -293,7 +346,11 @@ function handleComplete() {
         alert('书信功能暂未开放')
     });
 
+<<<<<<< HEAD
     container.addChild(icon_envelope.setTransform(preH * 11));
+=======
+    container.addChild(icon_envelope.setTransform(h - preH * 2));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 
     createjs.Tween.get(icon_envelope, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
 
@@ -304,7 +361,11 @@ function handleComplete() {
         alert('任务功能暂未开放')
     });
 
+<<<<<<< HEAD
     container.addChild(icon_taskbook.setTransform(preH * 12));
+=======
+    container.addChild(icon_taskbook.setTransform(h - preH * 1));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 
     createjs.Tween.get(icon_taskbook, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
 
@@ -314,7 +375,11 @@ function handleComplete() {
         alert('水壶')
     });
 
+<<<<<<< HEAD
     container.addChild(icon_kettle.setTransform(0, w - icon_kettle.image.width / 2));
+=======
+    container.addChild(icon_kettle.setTransform(0, w - icon_kettle.image.height));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 
     //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
 
@@ -324,7 +389,11 @@ function handleComplete() {
         alert('药壶')
     });
 
+<<<<<<< HEAD
     container.addChild(icon_pesticide.setTransform(preH * 1.5, w - icon_pesticide.image.width / 2));
+=======
+    container.addChild(icon_pesticide.setTransform(preH * 1.5 , w - icon_pesticide.image.height));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 
     //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
 
@@ -334,7 +403,11 @@ function handleComplete() {
         alert('铁铲')
     });
 
+<<<<<<< HEAD
     container.addChild(icon_shovel.setTransform(preH * 8.5, w - icon_shovel.image.width / 2));
+=======
+    container.addChild(icon_shovel.setTransform(preH * 7, w - icon_shovel.image.height));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 
     //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
 
@@ -344,13 +417,20 @@ function handleComplete() {
         removeAllRipe(imgArr)
     });
 
+<<<<<<< HEAD
     container.addChild(icon_gloves.setTransform(preH * 10, w - icon_gloves.image.width / 2));
+=======
+    container.addChild(icon_gloves.setTransform(preH * 8, w - icon_gloves.image.height));
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 
     createjs.Tween.get(icon_gloves, { loop: true }).to({ y: icon_gloves.y + 5 }, 500).to({ y: icon_gloves.y }, 800);
 
     stageBreakHandler();
 
+<<<<<<< HEAD
     console.log(container)
+=======
+>>>>>>> f4e2fbd645337cea3798621ab4618d168e74928a
 }
 
 
