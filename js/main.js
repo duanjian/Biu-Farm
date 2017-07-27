@@ -15,6 +15,58 @@ var canvas, loader, stage, container, stageWidth, stageHeight, stageScale, bitma
 var scale = 1 / window.devicePixelRatio;
 document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=device-width,width=device-width,initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
 
+
+(function () {
+    var supportsOrientation = (typeof window.orientation == 'number' && typeof window.onorientationchange == 'object');
+    var HTMLNode = document.body.parentNode;
+    var updateOrientation = function () {
+        // rewrite the function depending on what's supported
+        if (supportsOrientation) {
+            updateOrientation = function () {
+                var orientation = window.orientation;
+
+                switch (orientation) {
+                    case 90: case -90:
+                        orientation = 'landscape';
+                        break;
+                    default:
+                        orientation = 'portrait';
+                }
+
+                // set the class on the HTML element (i.e. )
+                HTMLNode.setAttribute('class', orientation);
+                alert('orient1');
+
+            }
+        } else {
+            updateOrientation = function () {
+                // landscape when width is biggest, otherwise portrait
+                var orientation = (window.innerWidth > window.innerHeight) ? 'landscape' : 'portrait';
+
+                // set the class on the HTML element (i.e. )
+                HTMLNode.setAttribute('class', orientation);
+                alert('orient2');
+
+            }
+        }
+        updateOrientation();
+    }
+    var init = function () {
+        // initialize the orientation
+        updateOrientation();
+
+        if (supportsOrientation) {
+            window.addEventListener('orientationchange', updateOrientation, false);
+        } else {
+            // fallback: update every 5 seconds
+            setInterval(updateOrientation, 5000);
+        }
+
+    }
+    window.addEventListener('DOMContentLoaded', init, false);
+})();
+
+
 var data = [
     { 'category': 'tomato', 'step': 3 },
     { 'category': 'tomato', 'step': 3 },
@@ -34,6 +86,7 @@ var data = [
 ]
 
 function init() {
+
     canvas = document.getElementById("mainView");
 
     stageScaleY = stageHeight / 1334;//锁屏的强制横屏标题栏在左边所以要减去128
@@ -62,20 +115,14 @@ function init() {
     }
 
 }
+
+//竖屏
 function stageBreakHandler(event) {
     if (stageWidth != document.documentElement.clientWidth || stageHeight != document.documentElement.clientHeight) {
         stageWidth = document.documentElement.clientWidth;
         stageHeight = document.documentElement.clientHeight;
 
-        //alert(document.documentElement.clientWidth)
-        //alert(document.documentElement.clientHeight)
-
-        //alert(document.body.clientWidth)
-        //alert(document.body.clientHeight)
-
-        //alert(stageHeight / 1334)
-        //alert(stageWidth /750)
-
+       
         //新的自适应方式
         canvas.width = stageWidth;
         canvas.height = stageHeight;
@@ -121,6 +168,41 @@ function stageBreakHandler(event) {
     }
     stage.update();
 }
+
+//横屏
+//function stagePortraitBreakHandler(event) {
+//    if (stageWidth != document.documentElement.clientWidth || stageHeight != document.documentElement.clientHeight) {
+//        stageWidth = document.documentElement.clientWidth;
+//        stageHeight = document.documentElement.clientHeight;
+
+
+//        //新的自适应方式
+//        canvas.width = stageWidth;
+//        canvas.height = stageHeight;
+        
+
+//        if (stageWidth < stageHeight) {
+//            stageScaleY = stageHeight / 1206;//锁屏的强制横屏标题栏在左边所以要减去128
+//            stageScaleX = stageWidth / (750);
+//            container.rotation = 90;
+//            container.x = stageWidth;
+//            container.scaleX = stageScaleX;
+//            container.scaleY = stageScaleY;
+
+//            //stage.scaleX = stageScaleX;
+//            //stage.scaleY = stageScaleY;
+//        }
+//        else {
+//            stageScaleY = stageHeight / 1334;
+//            stageScaleX = stageWidth / 750;
+//            container.rotation = 0;
+//            container.x = 0;
+//            container.scaleX = stageScaleX;
+//            container.scaleY = stageScaleY;
+//        }
+//    }
+//    stage.update();
+//}
 
 function preload() {
     var i = 0,
@@ -263,30 +345,30 @@ function handleComplete() {
     icon_warehouse.shadow = new createjs.Shadow("yellow", -1, -1, 30);
 
     icon_warehouse.addEventListener("click", function () {
-        alert('仓库功能暂未开放')
+        alert('warehouse')
     });
 
-    container.addChild(icon_warehouse.setTransform(h - icon_warehouse.image.height * 4));
+    container.addChild(icon_warehouse);
 
     createjs.Tween.get(icon_warehouse, { loop: true }).to({ y: icon_warehouse.y + 5 }, 1000).to({ y: icon_warehouse.y }, 800);
 
     var icon_seed = new createjs.Bitmap(loader.getResult('icon-seed'));
     icon_seed.shadow = new createjs.Shadow("yellow", -1, -1, 30);
     icon_seed.addEventListener("click", function () {
-        alert('种子袋功能暂未开放')
+        alert('seed')
     });
 
-    container.addChild(icon_seed.setTransform(h - icon_seed.image.height * 3));
+    container.addChild(icon_seed);
 
     createjs.Tween.get(icon_seed, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
 
     var icon_golden = new createjs.Bitmap(loader.getResult('icon-golden'));
     icon_golden.shadow = new createjs.Shadow("yellow", -1, -1, 30);
     icon_golden.addEventListener("click", function () {
-        alert('钱袋功能暂未开放')
+        alert('golden')
     });
 
-    container.addChild(icon_golden.setTransform(h - icon_golden.image.height * 2));
+    container.addChild(icon_golden);
 
     createjs.Tween.get(icon_golden, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
 
@@ -294,10 +376,10 @@ function handleComplete() {
     var icon_envelope = new createjs.Bitmap(loader.getResult('icon-envelope'));
     icon_envelope.shadow = new createjs.Shadow("yellow", -1, -1, 30);
     icon_envelope.addEventListener("click", function () {
-        alert('书信功能暂未开放')
+        alert('envelope')
     });
 
-    container.addChild(icon_envelope.setTransform(h - icon_envelope.image.height * 1));
+    container.addChild(icon_envelope);
 
     createjs.Tween.get(icon_envelope, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
 
@@ -305,40 +387,40 @@ function handleComplete() {
     var icon_taskbook = new createjs.Bitmap(loader.getResult('icon-taskbook'));
     icon_taskbook.shadow = new createjs.Shadow("yellow", -1, -1, 30);
     icon_taskbook.addEventListener("click", function () {
-        alert('任务功能暂未开放')
+        alert('taskbook')
     });
 
-    container.addChild(icon_taskbook.setTransform(h - icon_taskbook.image.height * 0));
+    container.addChild(icon_taskbook);
 
     createjs.Tween.get(icon_taskbook, { loop: true }).to({ y: icon_seed.y + 5 }, 1000).to({ y: icon_seed.y }, 800);
 
     var icon_kettle = new createjs.Bitmap(loader.getResult('icon-kettle'));
     icon_kettle.shadow = new createjs.Shadow("yellow", -1, -1, 30);
     icon_kettle.addEventListener("click", function () {
-        alert('水壶')
+        alert('kettle')
     });
 
-    container.addChild(icon_kettle.setTransform(0, w - icon_kettle.image.width));
+    container.addChild(icon_kettle);
 
     //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
 
     var icon_pesticide = new createjs.Bitmap(loader.getResult('icon-pesticide'));
     icon_pesticide.shadow = new createjs.Shadow("yellow", -1, -1, 30);
     icon_pesticide.addEventListener("click", function () {
-        alert('药壶')
+        alert('pesticide')
     });
 
-    container.addChild(icon_pesticide.setTransform(icon_pesticide.image.height, w - icon_pesticide.image.width));
+    container.addChild(icon_pesticide);
 
     //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
 
     var icon_shovel = new createjs.Bitmap(loader.getResult('icon-shovel'));
     icon_shovel.shadow = new createjs.Shadow("yellow", -1, -1, 30);
     icon_shovel.addEventListener("click", function () {
-        alert('铁铲')
+        alert('shovel')
     });
 
-    container.addChild(icon_shovel.setTransform(icon_seed.x , w - icon_shovel.image.width));
+    container.addChild(icon_shovel);
 
     //createjs.Tween.get(icon_kettle, { loop: true }).to({ x: icon_seed.x + 5 }, 1000).to({ x: icon_seed.x }, 800);
 
@@ -348,7 +430,7 @@ function handleComplete() {
         removeAllRipe(imgArr)
     });
 
-    container.addChild(icon_gloves.setTransform(icon_golden.x, w - icon_gloves.image.width));
+    container.addChild(icon_gloves);
 
     createjs.Tween.get(icon_gloves, { loop: true }).to({ y: icon_gloves.y + 5 }, 500).to({ y: icon_gloves.y }, 800);
 
@@ -360,12 +442,10 @@ function handleComplete() {
 
 function removeAllRipe(imgArr) {
     for (var i = 0; i < imgArr.length; i++) {
-        if (!imgArr[i].name.startWith('grass')) {
-
+        if (!imgArr[i].name.startWith('grass') && !imgArr[i].name.startWith('expand')) {
             createjs.Tween.get(imgArr[i]).wait(100).to({ y: -20, alpha: 0, visible: false }, 1000).call(function () {
                 stage.removeChild(imgArr[i])
             });
-
         }
     }
 }
