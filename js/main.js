@@ -35,7 +35,12 @@ document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=d
 
                 // set the class on the HTML element (i.e. )
                 HTMLNode.setAttribute('class', orientation);
-                alert('orient1');
+                //alert('orient1');
+
+                if (orientation == 'landscape') {
+
+                }
+
 
             }
         } else {
@@ -45,7 +50,7 @@ document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=d
 
                 // set the class on the HTML element (i.e. )
                 HTMLNode.setAttribute('class', orientation);
-                alert('orient2');
+                //alert('orient2');
 
             }
         }
@@ -158,13 +163,39 @@ function stageBreakHandler(event) {
             //stage.scaleY = stageScaleY;
         }
         else {
-            stageScaleY = stageHeight / 1334;
-            stageScaleX = stageWidth / 750;
+            //stageScaleY = stageHeight / 1334;
+            //stageScaleX = stageWidth / 750;
+            //container.rotation = 0;
+            //container.x = 0;
+            //container.scaleX = stageScaleX;
+            //container.scaleY = stageScaleY;
+
+            stageScaleX = stageWidth / 1334;
+            stageScaleY = stageHeight / 750;
+
             container.rotation = 0;
             container.x = 0;
             container.scaleX = stageScaleX;
             container.scaleY = stageScaleY;
         }
+
+        //canvas.width = stageWidth;
+        //canvas.height = stageHeight;
+        //if (stageWidth < stageHeight) {
+        //    stageScale = stageHeight / 1206;//锁屏的强制横屏标题栏在左边所以要减去128
+        //    container.rotation = 90;
+        //    container.x = 750 * stageScale;
+        //    container.scaleX = stageScale;
+        //    container.scaleY = stageScale;
+
+        //}
+        //else {
+        //    stageScale = stageWidth / 1334;
+        //    container.rotation = 0;
+        //    container.x = 0;
+        //    container.scaleX = stageScale;
+        //    container.scaleY = stageScale;
+        //}
     }
     stage.update();
 }
